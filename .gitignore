@@ -1,0 +1,21 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+bash.exe.stackdump
+
+# Dependency directory
+node_modules
+
+# Optional npm cache directory
+.npm
+
+# Webpack bundles directory
+dist
+
+# Optional REPL history
+.DS_Store
+.idea
+
+# Environment file
+.env

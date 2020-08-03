@@ -1,0 +1,24 @@
+{
+  "name": "gazon-web-scrapper",
+  "version": "1.0.0",
+  "description": "Web scrapper. Test task.",
+  "main": "scrapper.js",
+  "scripts": {
+    "start": "node scrapper.js",
+    "dev": "nodemon scrapper.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nik-di/gazon-web-scrapper.git"
+  },
+  "author": "Nikishin D.I.",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nik-di/gazon-web-scrapper/issues"
+  },
+  "homepage": "https://github.com/nik-di/gazon-web-scrapper#readme",
+  "devDependencies": {
+    "nodemon": "2.0.4",
+    "puppeteer": "5.2.1"
+  }
+}
