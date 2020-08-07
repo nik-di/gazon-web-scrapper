@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-const writeInLinks = (linkObj) => {
+const writeInProductsLinks = (linkObj) => {
   const targetFilePath = '../data/links.json';
   const initData = JSON.parse(fs.readFileSync(targetFilePath, (err, file) => file));
   initData.links.push(linkObj);
@@ -8,4 +8,4 @@ const writeInLinks = (linkObj) => {
   fs.writeFileSync(targetFilePath, JSON.stringify(initData));
 };
 
-module.exports = { writeInLinks };
+module.exports = { writeInProductsLinks };

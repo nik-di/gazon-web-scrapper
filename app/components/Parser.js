@@ -8,7 +8,7 @@ class Parser {
 
   /**
    * @param {string} page url to page for parse
-   * @param {string} targetType string of the parser type to launch
+   * @param {string} targetType string of the parser type to launch ['products-links', 'pages-links', 'product-props']
    */
   async parse(page, targetTtype) {
     return this._openPage(page)
