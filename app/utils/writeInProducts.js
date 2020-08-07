@@ -1,7 +1,7 @@
 const fs = require('fs');
 
 const writeInProducts = (productObj) => {
-  const targetFilePath = '../data/links.json';
+  const targetFilePath = '../data/products.json';
   const initData = JSON.parse(fs.readFileSync(targetFilePath, (err, file) => file));
   initData.products.push(productObj);
 
