@@ -2,10 +2,10 @@
   "name": "gazon-web-scrapper",
   "version": "1.0.0",
   "description": "Web scrapper. Test task.",
-  "main": "scrapper.js",
+  "main": "main.js",
   "scripts": {
-    "start": "node scrapper.js",
-    "dev": "nodemon scrapper.js"
+    "start": "node main",
+    "dev": "nodemon main"
   },
   "repository": {
     "type": "git",
