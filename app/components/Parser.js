@@ -22,8 +22,8 @@ class Parser {
           case 'pages-links':
             result = this._exactPagesLinks(res);
             break;
-          case 'product-props':
-            result = this._getProductProperties(res);
+          case 'products-props':
+            result = this._getProductsProperties(res);
             break;
         }
 
@@ -43,7 +43,7 @@ class Parser {
     return this.browser
       .then(browser => browser.newPage())
       .then(async page => {
-        await page.goto(pageLink);
+        await page.goto(pageLink, { waitUntil: 'load', timeout: 0 });
         return page;
       })
   }
@@ -58,7 +58,7 @@ class Parser {
         const hrefToProduct = span.closest('a').attributes.href.textContent;
         const baseUrl = location.origin.replace(/\/catalog\/\w*\d\S/, '');
         const href = baseUrl + hrefToProduct;
-        links.push({ href });
+        links.push(href);
       });
 
       return links;
@@ -92,7 +92,7 @@ class Parser {
     return { props: links, page: res };
   }
 
-  async _getProductProperties(res) {
+  async _getProductsProperties(res) {
 
     const properties = await res.evaluate((arg) => {
       const productBlock = document.querySelector('.catalog .item');
@@ -105,12 +105,17 @@ class Parser {
         images.slice(0, Math.floor(images.length / 2)) :
         images;
 
-      arg.description = [...productBlock.querySelectorAll('[itemprop=description]')].map(el => el.textContent).join('').replace(/\s+/g, ' ').trim();
+      arg.description = [...productBlock.querySelectorAll('.head [itemprop=description]')]
+        .map(el => el.textContent)
+        .join('')
+        .replace(/\s+/g, ' ')
+        .trim();
 
-      arg.price = productBlock.querySelector('.price_val').textContent.match(/\d*\s*\d*\s*[а-яё.]*/)[0];
+      arg.price = productBlock.querySelector('.price_val')
+        .textContent
+        .match(/\d*\s*\d*\s*[а-яё.]*/)[0];
 
-      const propsTable = [...productBlock.querySelectorAll('.char')];
-      console.log(propsTable[0], propsTable[0].quer)
+      const propsTable = [...document.querySelectorAll('.catalog .char')];
       arg.characteristics = propsTable.reduce((result, charElement, i, arr) => {
         const char = charElement.querySelector('.char_name').textContent.replace(/\s+/g, ' ').trim();
         const val = charElement.querySelector('.char_value').textContent.replace(/\s+/g, ' ').trim();
@@ -125,7 +130,8 @@ class Parser {
       }, [])
 
       return arg;
-    }, {})
+    }, {});
+
     return { props: properties, page: res };
   }
 
